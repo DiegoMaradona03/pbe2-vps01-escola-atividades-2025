@@ -2,6 +2,14 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const create = async (req, res) => {
+    const alunoExistente = await prisma.aluno.findUnique({
+        where: { ra: alunoRa }
+    });
+
+    if (!alunoExistente) {
+        return res.status(404).json({ error: "Aluno não encontrado." });
+    }
+    
     try {
         const telefone = await prisma.telefone.create({
             data: req.body

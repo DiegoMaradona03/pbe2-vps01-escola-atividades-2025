@@ -37,6 +37,12 @@ const readOne = async (req, res) => {
 };
 
 const update = async (req, res) => {
+    const { nota, peso } = req.body;
+
+    if (nota && peso) {
+        req.body.parcial = (nota * peso) / 10;
+    }
+
     try {
         const atividade = await prisma.atividade.update({
             where: {

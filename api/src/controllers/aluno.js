@@ -28,7 +28,8 @@ const readOne = async (req, res) => {
                         numero: true,
                         tipo: true
                     }
-                }
+                },
+                atividades: true
             },
             where: {
                 ra: req.params.ra
