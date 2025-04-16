@@ -27,7 +27,11 @@ Desenvolver as funcionalidades conforme requisitos
 - [CT005] Cadastre, altere e exclua uma atividade.
 
 ## Tecnologias
-
+- Node.js (Framework)
+- VsCode (IDE)
+- Insomnia (IDE de testes)
+- Prisma (ORM)
+- XAMPP (IDE) SGBD MySQL
 ## Passo a Passo de como executar a API
 - 1 Clone este repositório
 - 2 Abrir com Vscode
