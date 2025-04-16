@@ -52,3 +52,11 @@ npx nodemon
 npm start
 ```
 - 6 Abra o Insomnia e importe o arquivo **./docs/insomnia.yaml** para realizar os testes.
+
+## Testes feitos no Insomnia
+![DER e DC](./docs/insomnia.png)
+![DER e DC](./docs/insomnia2.png)
+![DER e DC](./docs/insomnia3.png)
+![DER e DC](./docs/insomnia4.png)
+![DER e DC](./docs/insomnia5.png)
+![DER e DC](./docs/insomnia6.png)

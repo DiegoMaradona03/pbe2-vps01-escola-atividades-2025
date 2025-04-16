@@ -10,6 +10,7 @@ datasource db {
 model Aluno{
   ra String @id @db.VarChar(10)
   nome String @db.VarChar(100)
+  email String? @db.VarChar(100)
   telefones Telefone[]
   atividades Atividade[]
 }

@@ -2,17 +2,15 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 const create = async (req, res) => {
-    const alunoExistente = await prisma.aluno.findUnique({
-        where: { ra: alunoRa }
-    });
-
-    if (!alunoExistente) {
-        return res.status(404).json({ error: "Aluno não encontrado." });
-    }
-    
     try {
         const telefone = await prisma.telefone.create({
-            data: req.body
+            data: {
+                numero: req.body.numero,
+                tipo: req.body.tipo,
+                aluno: {
+                    connect: { ra: req.body.alunoRa}
+                }
+            }
         });
         return res.status(201).json(telefone);
     } catch (error) {
@@ -27,14 +25,11 @@ const read = async (req, res) => {
 
 const readOne = async (req, res) => {
         const telefone = await prisma.telefone.findUnique({
-            select: {
-                id: true,
-                alunoRa: true,
-                numero: true,
-                tipo: true
-            },
             where: {
-                id: req.params.id
+                id: Number(req.params.id)
+            },
+            include: {
+                aluno: true
             }
         });
         return res.json(telefone);
@@ -44,7 +39,7 @@ const update = async (req, res) => {
     try {
         const telefone = await prisma.telefone.update({
             where: {
-                id: req.params.id
+                id: Number(req.params.id)
             },
             data: req.body
         });
@@ -56,9 +51,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     try {
-        await prisma.telefone.delete({
+        const telefone = await prisma.telefone.delete({
             where: {
-                id: req.params.id
+                id: Number(req.params.id)
             }
         });
         return res.status(204).send();

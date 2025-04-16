@@ -19,19 +19,13 @@ const read = async (req, res) => {
 
 const readOne = async (req, res) => {
         const atividade = await prisma.atividade.findUnique({
-            select: {
-                id: true,
-                nome: true,
-                alunoRa: true,
-                dataInicio: true,
-                dataEntrega: true,
-                nota: true,
-                peso: true,
-                parcial: true
-            },
             where: {
-                id: req.params.id
+                id: Number(req.params.id)
+            },
+            include: {
+                aluno: true
             }
+    
         });
         return res.json(atividade);
 };
@@ -46,7 +40,7 @@ const update = async (req, res) => {
     try {
         const atividade = await prisma.atividade.update({
             where: {
-                id: req.params.id
+                id: Number(req.params.id)
             },
             data: req.body
         });
@@ -58,9 +52,9 @@ const update = async (req, res) => {
 
 const remove = async (req, res) => {
     try {
-        await prisma.atividade.delete({
+        const atividade = await prisma.atividade.delete({
             where: {
-                id: req.params.id
+                id: Number(req.params.id)
             }
         });
         return res.status(204).send();
